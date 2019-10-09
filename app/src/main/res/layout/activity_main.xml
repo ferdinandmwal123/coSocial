@@ -15,7 +15,8 @@
 
     <EditText
         android:id="@+id/cName"
-        android:drawableLeft="@drawable/ic_action_cName"
+        android:drawableLeft="@drawable/ic_action_cnanme"
+        android:hint="Enter name"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_below="@id/logo"
@@ -24,7 +25,6 @@
         android:background="@color/whiteBg"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Company Name"
         android:textSize="16dp" />
 
     <EditText
@@ -36,17 +36,18 @@
         android:layout_marginTop="20dp"
         android:background="@color/whiteBg"
         android:textSize="16dp"
-        android:text="Email"
-        android:drawableStart="@drawable/ic_action_cEmail"
+        android:hint="enter email"
+        android:drawableStart="@drawable/ic_action_cemail"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/cPass"
-        android:drawableLeft="@drawable/ic_action_cPass"
+        android:drawableLeft="@drawable/ic_action_cpass"
         android:background="@color/whiteBg"
         android:text="password"
         android:layout_below="@id/cEmail"
+        android:hint="Enter pass"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"

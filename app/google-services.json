@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "439324150141",
+    "firebase_url": "https://cosocial-5f60b.firebaseio.com",
+    "project_id": "cosocial-5f60b",
+    "storage_bucket": "cosocial-5f60b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439324150141:android:453fe7bd3490a561446414",
+        "android_client_info": {
+          "package_name": "com.mwalagho.ferdinand.cosocial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439324150141-oif4jg2pabu42kmk25bsct74mitkn54a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mwalagho.ferdinand.cosocial",
+            "certificate_hash": "51fbf8385408383db9f08e32af0f46317170ba5b"
+          }
+        },
+        {
+          "client_id": "439324150141-s75o3iag1i9mo7laecfg5hod80pbfs5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ8ZOBN6rmEXInzNAmitqXuQZwDWH9CVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439324150141-s75o3iag1i9mo7laecfg5hod80pbfs5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
