@@ -10,12 +10,12 @@ import butterknife.ButterKnife;
 public class UsersActivity extends AppCompatActivity {
 
     @BindView(R.id.user) TextView mTextView;
+    public static final String TAG = UsersActivity.class.getSimpleName();
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
