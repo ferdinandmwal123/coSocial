@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public boolean onDoubleTapEvent(MotionEvent e) {
-        return false;
+        Toast.makeText(MainActivity.this,"Welcome",Toast.LENGTH_LONG).show();
+        return true;
     }
 
     @Override
