@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @BindView(R.id.cName) EditText name;
     @BindView(R.id.button3) Button mRegister;
-    public GestureDetector gestureDetector;
     public static final String TAG = MainActivity.class.getSimpleName();
 
 
