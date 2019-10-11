@@ -1,6 +1,7 @@
 package com.mwalagho.ferdinand.cosocial;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,5 +22,6 @@ public class UsersActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String user = intent.getStringExtra("names");
        mTextView.setText("Welcome " + user);
+        Log.i(TAG,"Created user");
     }
 }
