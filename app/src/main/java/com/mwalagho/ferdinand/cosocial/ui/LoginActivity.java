@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import android.widget.EditText;
+
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,13 +28,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.mwalagho.ferdinand.cosocial.R;
+import com.mwalagho.ferdinand.cosocial.UsersActivity;
 
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
 //    @BindView(R.id.emailEditText) EditText mEmail;
 //    @BindView(R.id.passwordEditText) EditText mPass;
+    @BindView(R.id.buttonClick) Button btnMaps;
     public static final String TAG = LoginActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
@@ -63,6 +67,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         SignInButton signInButton = findViewById(R.id.googleBtn);
         signInButton.setSize(SignInButton.SIZE_ICON_ONLY);
+
+        btnMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -127,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        Intent intent = new Intent(LoginActivity.this,MapsActivity.class);
+        Intent intent = new Intent(LoginActivity.this, UsersActivity.class);
         startActivity(intent);
     }
 

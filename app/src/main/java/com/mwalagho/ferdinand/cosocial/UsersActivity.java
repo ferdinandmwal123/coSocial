@@ -15,8 +15,10 @@ import butterknife.ButterKnife;
 
 public class UsersActivity extends AppCompatActivity {
 
-    @BindView(R.id.user)   TextView mTextView;
-    @BindView(R.id.button) Button buttonGrant;
+
+    @BindView(R.id.btnmap) Button btnMap;
+    @BindView(R.id.youtubebtn) Button btnYoutube;
+    @BindView(R.id.btn_quotes) Button btnQuote;
     public static final String TAG = UsersActivity.class.getSimpleName();
 
 
@@ -28,14 +30,32 @@ public class UsersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String user = intent.getStringExtra("names");
-       mTextView.setText("Welcome " + user);
-        Log.i(TAG,"Created user");
+//        Intent intent = getIntent();
+//        String user = intent.getStringExtra("names");
+//       mTextView.setText("Welcome " + user);
+//        Log.i(TAG,"Created user");
 
 
 
-        buttonGrant.setOnClickListener(new View.OnClickListener() {
+        btnQuote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UsersActivity.this,QuoteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+      btnYoutube.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Intent intent = new Intent(UsersActivity.this, YoutubeActivity.class);
+              startActivity(intent);
+          }
+      });
+
+
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1= new Intent(UsersActivity.this, MapsActivity.class);

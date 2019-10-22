@@ -67,4 +67,13 @@
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/buttonClick"
+        android:layout_width="match_parent"
+        android:shadowColor="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:text="Button" />
+
 </RelativeLayout>
