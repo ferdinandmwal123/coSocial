@@ -74,7 +74,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
 
 
         }
-        private YouTubePlayer.PlaybackEventListener playbackEventListener = new YouTubePlayer.PlaybackEventListener() {
+         YouTubePlayer.PlaybackEventListener playbackEventListener = new YouTubePlayer.PlaybackEventListener() {
             @Override
             public void onPlaying() {
 
