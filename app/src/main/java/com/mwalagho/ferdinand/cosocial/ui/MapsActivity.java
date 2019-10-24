@@ -70,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        LatLng Nairobi = new LatLng(1.2921,36.8219);
+        LatLng Nairobi = new LatLng(-1.3007217,36.7845368);
         map.addMarker(new MarkerOptions().position(Nairobi).title("Nairobi"));
         map.moveCamera(CameraUpdateFactory.newLatLng(Nairobi));
 //        LatLng latLng = new LatLng(-1.3007217,36.7845368);

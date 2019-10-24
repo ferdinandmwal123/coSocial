@@ -35,13 +35,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-//    @BindView(R.id.emailEditText) EditText mEmail;
+    //    @BindView(R.id.emailEditText) EditText mEmail;
 //    @BindView(R.id.passwordEditText) EditText mPass;
     @BindView(R.id.buttonClick) Button btnMaps;
     public static final String TAG = LoginActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
-   GoogleSignInClient mGoogleSignInClient;
+    GoogleSignInClient mGoogleSignInClient;
 
 
 
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(currentUser != null){
             Log.d(TAG,"Currently signed in as" + currentUser.getDisplayName());
-            Toast.makeText(this,"Currently logged in:" + currentUser.getEmail(),Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Currently logged in as" + currentUser.getEmail(),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -124,14 +124,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-            if(task.isSuccessful()){
-                FirebaseUser user = mAuth.getCurrentUser();
-                Log.d(TAG,"signInSucces: user" + user.getEmail());
-                Toast.makeText(LoginActivity.this,"Succesfull firebase authentication",Toast.LENGTH_LONG).show();
-            }    else {
-                Log.w(TAG,"signInFailedWithEXCEPTION",task.getException());
-                Toast.makeText(LoginActivity.this,"Firebase Authentication Failed",Toast.LENGTH_LONG).show();
-            }
+                if(task.isSuccessful()){
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    Log.d(TAG,"signInSucces: user" + user.getEmail());
+                    Toast.makeText(LoginActivity.this,"Succesfull firebase authentication",Toast.LENGTH_LONG).show();
+                }    else {
+                    Log.w(TAG,"signInFailedWithEXCEPTION",task.getException());
+                    Toast.makeText(LoginActivity.this,"Firebase Authentication Failed",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
