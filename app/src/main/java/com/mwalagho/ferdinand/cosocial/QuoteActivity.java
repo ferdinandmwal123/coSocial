@@ -1,6 +1,7 @@
 package com.mwalagho.ferdinand.cosocial;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import static com.mwalagho.ferdinand.cosocial.Constants.QUOTE_BASE_URL;
 
 public class QuoteActivity extends AppCompatActivity {
     @BindView(R.id.text_view_result) TextView mTextView;
+    public static final String TAG = QuoteActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,29 +36,31 @@ public class QuoteActivity extends AppCompatActivity {
 
         QuoteApi quoteApi = retrofit.create(QuoteApi.class);
 
-        Call<List<Quote>> call = quoteApi.getQuotes();
+        Call<QuoteResult> call = quoteApi.getQuotes();
 
-        call.enqueue(new Callback<List<Quote>>() {
+        call.enqueue(new Callback<QuoteResult>() {
             @Override
-            public void onResponse(Call<List<Quote>> call, Response<List<Quote>> response) {
+            public void onResponse(Call<QuoteResult> call, Response<QuoteResult> response) {
+                Log.i(TAG,"check the response from the api" + response);
                 if(!response.isSuccessful()){
                     mTextView.setText("Code: " + response.code());//Return http code e.g. 404
                     return;
                 }
-                List<Quote> quotes = response.body();
+                QuoteResult quotes = response.body();
 
-                for(Quote quote : quotes){
-                    String content = "";
-                    content += "ID " + quote.get_id() + "\n";
-                    content += "Quote : " + quote.getQuote() + "\n";
-                    content+= "Author :" + quote.getAuthor() + "\n\n";
-
-                    mTextView.append(content);
-                }
+//                for(Quote quote : quotes){
+//                    String content = "";
+//                    content += "ID " + quote.get_id() + "\n";
+//                    content += "Quote : " + quote.getQuote() + "\n";
+//                    content+= "Author :" + quote.getAuthor() + "\n\n";
+//
+//                    mTextView.append(content);
+//                }
             }
 
             @Override
-            public void onFailure(Call<List<Quote>> call, Throwable t) {
+            public void onFailure(Call<QuoteResult> call, Throwable t) {
+                Log.i(TAG,"check the response from the api" + t.getMessage());
                 mTextView.setText(t.getMessage());
             }
         });

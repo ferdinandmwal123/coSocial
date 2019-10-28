@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -21,16 +23,18 @@
 
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".UsersActivity"></activity>
-        <activity android:name=".ui.MapsActivity" />
-        <activity android:name=".ui.CreateAccountActivity" />
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.MapsActivity"/>
+        <activity android:name=".PostActivity" android:parentActivityName=".MainActivity">
+
+        </activity>
+        <activity android:name=".ui.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuoteActivity" />
+        <activity android:name=".QuoteActivity"/>
     </application>
 
 </manifest>

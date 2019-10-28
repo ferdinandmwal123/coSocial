@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/imageSelect"
+        android:layout_width="match_parent"
+        android:layout_height="800px" />
+
+    <EditText
+        android:id="@+id/nameField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageSelect"
+        android:layout_marginTop="130px"
+        android:padding="15dp"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Post Name" />
+
+    <EditText
+        android:id="@+id/descField"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/nameField"
+        android:padding="15dp"
+        android:hint="Post description"
+        android:layout_marginTop="105px"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        />
+
+    <Button
+        android:id="@+id/buttonPost"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:text="Submit post" />
+
+
+</RelativeLayout>

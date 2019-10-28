@@ -2,9 +2,13 @@ package com.mwalagho.ferdinand.cosocial;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mwalagho.ferdinand.cosocial.ui.MapsActivity;
@@ -63,4 +67,20 @@ public class UsersActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        Log.i(TAG,"Main Menu created");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        startActivity(new Intent(UsersActivity.this, PostActivity.class));
+        return super.onOptionsItemSelected(item);
+
+    }
+
 }
