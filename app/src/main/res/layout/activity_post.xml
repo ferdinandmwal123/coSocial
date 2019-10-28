@@ -6,7 +6,9 @@
     <ImageButton
         android:id="@+id/imageSelect"
         android:layout_width="match_parent"
-        android:layout_height="800px" />
+        android:layout_height="800px"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
 
     <EditText
         android:id="@+id/nameField"

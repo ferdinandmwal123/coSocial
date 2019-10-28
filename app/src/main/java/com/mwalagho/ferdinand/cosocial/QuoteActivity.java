@@ -47,15 +47,6 @@ public class QuoteActivity extends AppCompatActivity {
                     return;
                 }
                 QuoteResult quotes = response.body();
-
-//                for(Quote quote : quotes){
-//                    String content = "";
-//                    content += "ID " + quote.get_id() + "\n";
-//                    content += "Quote : " + quote.getQuote() + "\n";
-//                    content+= "Author :" + quote.getAuthor() + "\n\n";
-//
-//                    mTextView.append(content);
-//                }
             }
 
             @Override
