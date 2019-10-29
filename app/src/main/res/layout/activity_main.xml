@@ -4,67 +4,12 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/bgColor">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="220dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="59dp"
-        android:background="@color/bgColor"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/logo" />
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/postList">
 
-    <EditText
-        android:id="@+id/cName"
-        android:drawableLeft="@drawable/ic_action_cnanme"
-        android:hint="Enter name"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_below="@id/logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:background="@color/whiteBg"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="16dp" />
-
-    <EditText
-        android:id="@+id/cEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_below="@id/cName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/whiteBg"
-        android:textSize="16dp"
-        android:hint="enter email"
-        android:drawableStart="@drawable/ic_action_cemail"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/cPass"
-        android:drawableLeft="@drawable/ic_action_cpass"
-        android:background="@color/whiteBg"
-        android:text="password"
-        android:layout_below="@id/cEmail"
-        android:hint="Enter pass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:textSize="16dp"
-        android:ems="10"
-        android:inputType="textPassword" />
-
-    <Button
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button"
-        android:layout_below="@id/cPass"
-        android:layout_marginTop="70dp"
-        android:id="@+id/button3"
-        android:layout_width="190dp"
-        android:layout_height="80dp"
-        android:text="Button" />
+</androidx.recyclerview.widget.RecyclerView>
 
 
 </RelativeLayout>

@@ -1,37 +1,33 @@
 package com.mwalagho.ferdinand.cosocial;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.view.GestureDetector;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.google.firebase.*;
-
-import java.util.Map;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener{
 
-    @BindView(R.id.cName) EditText name;
-    @BindView(R.id.button3) Button mRegister;
+
+    @BindView(R.id.postList) RecyclerView mPostList;
     public static final String TAG = MainActivity.class.getSimpleName();
     private Firebase mRef;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,37 +36,54 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         ButterKnife.bind(this);
         Firebase.setAndroidContext(this);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Post");
+
         mRef = new Firebase("https://imfree-e0aef.firebaseio.com/");
+        mPostList.setHasFixedSize(true);
+        mPostList.setLayoutManager(new LinearLayoutManager(this));
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-
-
-        mRegister.setOnClickListener(new View.OnClickListener() {
+        FirebaseRecyclerAdapter<Blog,BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(Blog.class,R.layout.post_row,BlogViewHolder.class,mDatabase) {
+            @NonNull
             @Override
-            public void onClick(View v) {
-
-                Firebase mRefChild = mRef.child("Name");
-                String input = name.getText().toString();
-                mRefChild.setValue(input);
-
-                String getNames = name.getText().toString();
-              ((EditText) findViewById(R.id.cName)).setText(" ");
-
-
-
-                Intent intent = new Intent(MainActivity.this,UsersActivity.class);
-                intent.putExtra("names",getNames);
-                startActivity(intent);
-
-
-                Toast.makeText(MainActivity.this,"Registered Successfully!",Toast.LENGTH_LONG).show();
-                Log.i(TAG,"User saved");
+            public BlogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return null;
             }
-        });
+
+            @Override
+            protected void onBindViewHolder(@NonNull BlogViewHolder blogViewHolder, int i, @NonNull Blog blog) {
+                blogViewHolder.setTitle(blog.getTitle());
+                blogViewHolder.setDesc(blog.getDesc());
+            }
 
 
 
+        };
+        mPostList.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class BlogViewHolder extends RecyclerView.ViewHolder{//anonymous class??
+
+        View mView;
+        public BlogViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            itemView = mView;
+        }
+        public void setTitle(String title){
+
+            TextView post_title = (TextView) mView.findViewById(R.id.post_title);
+            post_title.setText(title);
+        }
+        public void setDesc(String desc){
+            TextView post_desc = mView.findViewById(R.id.post_text);
+            post_desc.setText(desc);
+        }
     }
 
     @Override
