@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public static final String TAG = MainActivity.class.getSimpleName();
     private Firebase mRef;
     private DatabaseReference mDatabase;
+    private FirebaseRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,28 +47,17 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         mPostList.setHasFixedSize(true);
         mPostList.setLayoutManager(new LinearLayoutManager(this));
 
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        adapter.startListening();
 
-//        FirebaseRecyclerAdapter<Blog,BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(Blog.class,R.layout.post_row,BlogViewHolder.class,mDatabase ) {
-//            @NonNull
-//            @Override
-//            public BlogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onBindViewHolder(@NonNull BlogViewHolder blogViewHolder, int i, @NonNull Blog blog) {
-//                blogViewHolder.setTitle(blog.getTitle());
-//                blogViewHolder.setDesc(blog.getDesc());
-//            }
-//
-//
-//
-//        };
+    }
+
+    private void fetch(){
         FirebaseRecyclerOptions<Blog> options = new FirebaseRecyclerOptions.Builder<Blog>()
                 .setQuery(mDatabase, new SnapshotParser<Blog>() {
                     @NonNull
@@ -78,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 })
                 .build();
 
-        FirebaseRecyclerAdapter<Blog, BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(options){
+        adapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(options){
             @NonNull
             @Override
             public BlogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -93,7 +83,13 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 blogViewHolder.setDesc(blog.getDesc());
             }
         };
-        mPostList.setAdapter(firebaseRecyclerAdapter);
+        mPostList.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder{//anonymous class??
