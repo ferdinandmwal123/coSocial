@@ -1,11 +1,13 @@
 package com.mwalagho.ferdinand.cosocial;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     @Override
     protected void onStart() {
         super.onStart();
+        fetch();
         adapter.startListening();
 
     }
@@ -81,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             protected void onBindViewHolder(@NonNull BlogViewHolder blogViewHolder, int i, @NonNull Blog blog) {
                 blogViewHolder.setTitle(blog.getTitle());
                 blogViewHolder.setDesc(blog.getDesc());
+                blogViewHolder.setImage(getApplicationContext(),blog.getImage());
             }
         };
         mPostList.setAdapter(adapter);
@@ -108,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         public void setDesc(String desc){
             TextView post_desc = mView.findViewById(R.id.post_text);
             post_desc.setText(desc);
+        }
+        public void setImage(Context ctx, String image){
+            ImageView postImage = (ImageView) mView.findViewById(R.id.post_image);
+            Picasso.with(ctx).load(image).into(postImage);
         }
     }
 

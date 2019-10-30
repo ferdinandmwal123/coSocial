@@ -3,9 +3,12 @@ package com.mwalagho.ferdinand.cosocial;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -20,8 +23,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.mwalagho.ferdinand.cosocial.Constants.QUOTE_BASE_URL;
 
 public class QuoteActivity extends AppCompatActivity {
-    @BindView(R.id.text_view_result) TextView mTextView;
+    @BindView(R.id.quotes_view) RecyclerView mQuoteRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
     public static final String TAG = QuoteActivity.class.getSimpleName();
+    List<Quote> quotes;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,18 +50,24 @@ public class QuoteActivity extends AppCompatActivity {
             public void onResponse(Call<QuoteResult> call, Response<QuoteResult> response) {
                 Log.i(TAG,"check the response from the api" + response);
                 if(!response.isSuccessful()){
-                    mTextView.setText("Code: " + response.code());//Return http code e.g. 404
+                    Toast.makeText(QuoteActivity.this,"Code: " + response.code(),Toast.LENGTH_LONG).show();//Return http code e.g. 404
                     return;
                 }
                 QuoteResult quotes = response.body();
+
             }
 
             @Override
             public void onFailure(Call<QuoteResult> call, Throwable t) {
                 Log.i(TAG,"check the response from the api" + t.getMessage());
-                mTextView.setText(t.getMessage());
+                Toast.makeText(QuoteActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
 
+        layoutManager = new LinearLayoutManager(this);
+        mQuoteRecyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new QuoteAdapter(quotes);
+        mQuoteRecyclerView.setAdapter(mAdapter);
     }
 }
