@@ -2,6 +2,7 @@ package com.mwalagho.ferdinand.cosocial;
 
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.database.SnapshotParser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,11 +52,39 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerAdapter<Blog,BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(Blog.class,R.layout.post_row,BlogViewHolder.class,mDatabase) {
+//        FirebaseRecyclerAdapter<Blog,BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(Blog.class,R.layout.post_row,BlogViewHolder.class,mDatabase ) {
+//            @NonNull
+//            @Override
+//            public BlogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onBindViewHolder(@NonNull BlogViewHolder blogViewHolder, int i, @NonNull Blog blog) {
+//                blogViewHolder.setTitle(blog.getTitle());
+//                blogViewHolder.setDesc(blog.getDesc());
+//            }
+//
+//
+//
+//        };
+        FirebaseRecyclerOptions<Blog> options = new FirebaseRecyclerOptions.Builder<Blog>()
+                .setQuery(mDatabase, new SnapshotParser<Blog>() {
+                    @NonNull
+                    @Override
+                    public Blog parseSnapshot(@NonNull DataSnapshot snapshot) {
+                        return new Blog(snapshot.child("title").getValue().toString(), snapshot.child("desc").getValue().toString(),snapshot.child("image").getValue().toString());
+                    }
+                })
+                .build();
+
+        FirebaseRecyclerAdapter<Blog, BlogViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(options){
             @NonNull
             @Override
             public BlogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.post_row, parent, false);
+                return new BlogViewHolder(view);
             }
 
             @Override
@@ -60,9 +92,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 blogViewHolder.setTitle(blog.getTitle());
                 blogViewHolder.setDesc(blog.getDesc());
             }
-
-
-
         };
         mPostList.setAdapter(firebaseRecyclerAdapter);
     }
@@ -73,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         public BlogViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            itemView = mView;
+            mView = itemView;
         }
         public void setTitle(String title){
 
