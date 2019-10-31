@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "439324150141",
-    "firebase_url": "https://cosocial-5f60b.firebaseio.com",
-    "project_id": "cosocial-5f60b",
-    "storage_bucket": "cosocial-5f60b.appspot.com"
+    "project_number": "842056533183",
+    "firebase_url": "https://imfree-e0aef.firebaseio.com",
+    "project_id": "imfree-e0aef",
+    "storage_bucket": "imfree-e0aef.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:439324150141:android:453fe7bd3490a561446414",
+        "mobilesdk_app_id": "1:842056533183:android:701c8e4c555cd69459720a",
         "android_client_info": {
           "package_name": "com.mwalagho.ferdinand.cosocial"
         }
       },
       "oauth_client": [
         {
-          "client_id": "439324150141-oif4jg2pabu42kmk25bsct74mitkn54a.apps.googleusercontent.com",
+          "client_id": "842056533183-ett125egba9ihq0ici2qqegsij2la68m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mwalagho.ferdinand.cosocial",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "439324150141-s75o3iag1i9mo7laecfg5hod80pbfs5h.apps.googleusercontent.com",
+          "client_id": "842056533183-eq9mnqj3b4qr7o8ku88u956q1l92v58g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCQ8ZOBN6rmEXInzNAmitqXuQZwDWH9CVU"
+          "current_key": "AIzaSyDqAnk3EpkP0rZJpQOG0PmLiDP5FwttsAg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "439324150141-s75o3iag1i9mo7laecfg5hod80pbfs5h.apps.googleusercontent.com",
+              "client_id": "842056533183-eq9mnqj3b4qr7o8ku88u956q1l92v58g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
