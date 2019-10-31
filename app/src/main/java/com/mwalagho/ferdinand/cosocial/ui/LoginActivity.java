@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -77,8 +78,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser != null){
-            Log.d(TAG,"Currently signed in as" + currentUser.getDisplayName());
+            Log.d(TAG,"Currently signed in as " + currentUser.getDisplayName());
             Toast.makeText(this,"Currently logged in as" + currentUser.getEmail(),Toast.LENGTH_LONG).show();
+            startActivity(new Intent(LoginActivity.this,UsersActivity.class));
+            Animatoo.animateSlideRight(this);
+        } else{
+            Toast.makeText(this,"Kindly login",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -119,7 +124,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser user = mAuth.getCurrentUser();
-                    Log.d(TAG,"signInSucces: user" + user.getEmail());
+                    Log.d(TAG,"signInSucces:  " + user.getEmail());
                     Toast.makeText(LoginActivity.this,"Succesfull firebase authentication",Toast.LENGTH_LONG).show();
                 }    else {
                     Log.w(TAG,"signInFailedWithEXCEPTION",task.getException());
@@ -134,6 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivityForResult(signInIntent, RC_SIGN_IN);
         Intent intent = new Intent(LoginActivity.this, UsersActivity.class);
         startActivity(intent);
+        Animatoo.animateShrink(this);
     }
 
 

@@ -1,19 +1,13 @@
 package com.mwalagho.ferdinand.cosocial;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class QuoteResult {
 
-    private List<Quote> result;
+    public ArrayList<Quote> results;
 
 
-    public List<Quote> getResult() {
-        return result;
-    }
 
-    public void setResult(List<Quote> result) {
-        this.result = result;
-    }
 }
 
 

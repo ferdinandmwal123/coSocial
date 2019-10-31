@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -13,20 +12,17 @@ import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PostActivity extends AppCompatActivity {
+
 
     @BindView(R.id.imageSelect) ImageButton mSelectImage;
     @BindView(R.id.nameField) EditText mPostTitle;
@@ -58,12 +54,7 @@ public class PostActivity extends AppCompatActivity {
 
         });
 
-        mSubmitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startPosting();
-            }
-        });
+        mSubmitBtn.setOnClickListener(v -> startPosting());
     }
 
     private void startPosting() {
@@ -76,29 +67,23 @@ public class PostActivity extends AppCompatActivity {
         if(!TextUtils.isEmpty(titleValue) && !TextUtils.isEmpty(descValue) && mImageUri != null){
 
             StorageReference filePath = mStorage.child("Post_images").child(mImageUri.getLastPathSegment());
-            filePath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            filePath.putFile(mImageUri).addOnSuccessListener(taskSnapshot -> {
 
-                    Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
-                    task.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String photoLink = uri.toString();
+                Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                task.addOnSuccessListener(uri -> {
+                    String photoLink = uri.toString();
 
 
-                            DatabaseReference newPost = mDatabase.push();//create unique random id
+                    DatabaseReference newPost = mDatabase.push();//create unique random id
 
-                            newPost.child("title").setValue(titleValue);
-                            newPost.child("desc").setValue(descValue);
-                            newPost.child("image").setValue(photoLink);
+                    newPost.child("title").setValue(titleValue);
+                    newPost.child("desc").setValue(descValue);
+                    newPost.child("image").setValue(photoLink);
 
-                            mProgress.dismiss();
-                            startActivity(new Intent(PostActivity.this,MainActivity.class));
-                        }
-                    });
+                    mProgress.dismiss();
+                    startActivity(new Intent(PostActivity.this,MainActivity.class));
+                });
 
-                }
             });
         }
 

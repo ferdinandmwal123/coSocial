@@ -1,5 +1,6 @@
 package com.mwalagho.ferdinand.cosocial;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuotesViewHo
     // constructor
     public QuoteAdapter(List<Quote> quotes) {
         this.quotes = quotes;
+        Log.i("quotesList in quotes", String.valueOf(quotes));
     }
 
 
@@ -52,8 +54,13 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuotesViewHo
 
     @Override
     public int getItemCount() {
+        if(quotes == null) {
+            return 0;
+        }
         return quotes.size();
     }
 
-
+    public List<Quote> getQuotes() {
+        return quotes;
+    }
 }

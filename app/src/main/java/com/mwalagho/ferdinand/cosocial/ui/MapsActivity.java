@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.mwalagho.ferdinand.cosocial.R;
 
@@ -31,7 +29,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
-    public static final String TAG = MapsActivity.class.getSimpleName();
+//    public static final String TAG = MapsActivity.class.getSimpleName();
     GoogleMap map;
 
     @Override
@@ -51,18 +49,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+            assert mapFragment != null;
+            mapFragment.getMapAsync(this);
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null){
-                    currentLocation = location;
-                    Toast.makeText(getApplicationContext(),currentLocation.getLatitude()+ "" + currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
+        task.addOnSuccessListener(location -> {
+            if (location != null){
+                currentLocation = location;
+                Toast.makeText(getApplicationContext(),"This is your location" + currentLocation.getLatitude()+ " , " + currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
 
-                }
             }
         });
     }
@@ -71,17 +67,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         LatLng Nairobi = new LatLng(-1.3007217,36.7845368);
-        map.addMarker(new MarkerOptions().position(Nairobi).title("Nairobi"));
+        map.addMarker(new MarkerOptions().position(Nairobi).title("Moringa School Nairobi"));
         map.moveCamera(CameraUpdateFactory.newLatLng(Nairobi));
-//        LatLng latLng = new LatLng(-1.3007217,36.7845368);
-//        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("CurrentLocation");
-//        map.addMarker(new MarkerOptions().position(latLng).title("Moringa School"));
-//        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        map.getFocusedBuilding();
 
-//        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-//        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,5));
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//        googleMap.addMarker(markerOptions);
 
     }
 
@@ -91,6 +80,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         case REQUEST_CODE:
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             fetchLastLocation();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
         }
         break;
     }

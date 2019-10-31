@@ -2,6 +2,7 @@ package com.mwalagho.ferdinand.cosocial;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,14 +36,8 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         setContentView(R.layout.activity_youtube);
 
 
-//        ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.activity_youtube);
         ConstraintLayout layout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.activity_youtube, null);
         setContentView(layout);
-
-//        Button button = new Button(this);
-//        button.setLayoutParams(new ConstraintLayout.LayoutParams(300,80));
-//        button.setText("Button added");
-//        layout.addView(button);
 
         YouTubePlayerView playerView = new YouTubePlayerView(this);
         playerView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -82,16 +77,19 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
 
             @Override
             public void onPaused() {
-
+                Toast.makeText(YoutubeActivity.this,"Video successfully paused",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onStopped() {
+                Toast.makeText(YoutubeActivity.this,"Video successfully stopped",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(YoutubeActivity.this,UsersActivity.class));
 
             }
 
             @Override
             public void onBuffering(boolean b) {
+                Toast.makeText(YoutubeActivity.this,"Video is buffering, you must be using Zuku",Toast.LENGTH_LONG).show();
 
             }
 
